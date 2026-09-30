@@ -33,8 +33,12 @@ EVENTS_FILE = ROOT / "_data" / "events.json"
 MODEL = os.environ.get("NEWSBLOG_MODEL", "claude-sonnet-5-5")
 PAGE_CHARS = 20000  # per-page cap sent to the model
 TYPES = ["summer-school", "training", "technical-visit", "social"]
-UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36 NuclearNewswireBot/1.0")
+# Some sites reject one style of user agent and accept the other; try both.
+UAS = [
+    "Mozilla/5.0 (compatible; NuclearNewswireBot/1.0)",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36 NuclearNewswireBot/1.0",
+]
 
 SYSTEM_PROMPT = """You maintain the events calendar of "Nuclear Newswire", a
 nuclear-sector blog. You receive the text of event/news pages from nuclear
@@ -123,10 +127,16 @@ class _TextExtractor(HTMLParser):
 
 
 def fetch_text(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        charset = r.headers.get_content_charset() or "utf-8"
-        html = r.read().decode(charset, errors="replace")
+    for i, ua in enumerate(UAS):
+        req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept": "text/html,*/*"})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                charset = r.headers.get_content_charset() or "utf-8"
+                html = r.read().decode(charset, errors="replace")
+            break
+        except urllib.error.HTTPError:
+            if i == len(UAS) - 1:
+                raise
     p = _TextExtractor(url)
     p.feed(html)
     text = "".join(p.out)

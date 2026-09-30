@@ -12,10 +12,15 @@ sources:
     url: https://enen.eu/
   - name: ENEN Education & Training
     url: https://enen.eu/index.php/category/education-and-training/
+  # IAEA and OECD/NEA block automated requests (HTTP 403 for every client), so
+  # they are disabled. Add their events by hand in _data/events.json, or enable
+  # these if they ever open up.
   - name: IAEA
     url: https://www.iaea.org/events
+    enabled: false
   - name: OECD/NEA
     url: https://www.oecd-nea.org/jcms/pl_20/events
+    enabled: false
   # LinkedIn (BNS Young Generation) cannot be fetched automatically: it needs a
   # login and scraping is against LinkedIn's terms. Add those events by hand in
   # _data/events.json, or open a PR / issue with the link.

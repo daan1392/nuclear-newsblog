@@ -68,3 +68,10 @@ bundle exec jekyll serve   # http://localhost:4000
 ## Cost
 
 A run sends ~20–60 short feed items and gets back up to 5 briefs — typically a few cents per day.
+
+## Events page
+
+`/events/` lists upcoming summer schools, trainings, technical visits and social events. Every Monday the *Update events* workflow reads the pages in `scripts/event_sources.yml` (BNS, ENS, ENEN, SCK CEN), has Claude extract the events they list, and opens a PR that edits `_data/events.json`. Review and merge like the article PRs; past events drop off automatically.
+
+- IAEA and OECD/NEA block automated requests, and LinkedIn cannot be scraped, so add events from those by hand to `_data/events.json` (fields: `title`, `type` = `summer-school` | `training` | `technical-visit` | `social`, `start_date`, `end_date`, `location`, `organizer`, `summary`, `url`, `source`). Hand-added entries are kept.
+- Test fetching locally with `python scripts/generate_events.py --dry-run`.
