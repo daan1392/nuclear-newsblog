@@ -1,0 +1,23 @@
+name: Check scripts
+
+on:
+  push:
+    paths:
+      - "scripts/**"
+  pull_request:
+    paths:
+      - "scripts/**"
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Syntax check
+        run: python -m py_compile scripts/*.py
+      - name: Fetch and parse feeds (no API call)
+        run: python scripts/generate_articles.py --dry-run | tail -15

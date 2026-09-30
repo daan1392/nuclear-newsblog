@@ -291,8 +291,8 @@ def collect_items(cfg: dict, seen: set[str], since_ts: float | None) -> list[dic
 
     # Feeds that publish only headlines (IAEA) or PDFs (NRC): pull text from the page.
     for it in items:
-        if len(it["summary"]) < THIN_SUMMARY and not it["link"].lower().endswith(".pdf")
-                and not any(h in it["link"] for h in cfg.get("no_enrich_hosts", [])):
+        if (len(it["summary"]) < THIN_SUMMARY and not it["link"].lower().endswith(".pdf")
+                and not any(h in it["link"] for h in cfg.get("no_enrich_hosts", []))):
             try:
                 page = fetch_page(it["link"])
                 it["summary"] = (it["summary"] + " " + page["summary"]).strip()[:1500]
