@@ -1,36 +1,21 @@
 ---
 layout: default
 ---
-<div class="content home">
-  <article class="article">
-    <section class="hero">
-      <h1>{{ site.title | escape }}</h1>
-      <p>{{ site.description | escape }}</p>
-      <p class="hero-actions">
-        <a class="btn primary" href="{{ '/topics/' | relative_url }}">Browse topics</a>
-        <a class="btn" href="{{ '/events/' | relative_url }}">Upcoming events</a>
-        <a class="btn" href="{{ '/search/' | relative_url }}">Search</a>
-      </p>
-    </section>
+<div class="home">
+  {%- if content != "" -%}{{ content }}{%- endif -%}
 
-    {%- if content != "" -%}<div class="prose">{{ content }}</div>{%- endif -%}
+  {% include topic-chips.html %}
 
-    {% include topic-chips.html %}
-
-    <h2 class="section-title">Latest articles</h2>
-    <ul class="cards">
-      {%- assign latest = site.posts | slice: 0, 18 -%}
-      {%- for post in latest -%}
-      <li class="card">
-        <p class="meta">
-          {%- if post.categories.first %}<a class="badge" href="{{ '/topics/' | relative_url }}#{{ post.categories.first | slugify }}">{{ post.categories.first | escape }}</a>{% endif -%}
-          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time>
-        </p>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
-        {%- if post.excerpt -%}<p class="excerpt">{{ post.excerpt | strip_html | strip | truncate: 190 }}</p>{%- endif -%}
-      </li>
-      {%- endfor -%}
-    </ul>
-    <p class="more"><a href="{{ '/archive/' | relative_url }}">All {{ site.posts.size }} articles in the archive &rarr;</a></p>
-  </article>
+  <h2 class="post-list-heading">Latest articles</h2>
+  <ul class="post-list">
+    {%- assign latest = site.posts | slice: 0, 20 -%}
+    {%- for post in latest -%}
+    <li>
+      <span class="post-meta">{{ post.date | date: "%-d %b %Y" }}{% if post.categories.first %} &middot; <a href="{{ '/topics/' | relative_url }}#{{ post.categories.first | slugify }}">{{ post.categories.first | escape }}</a>{% endif %}</span>
+      <h3><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+      {%- if post.excerpt -%}<p>{{ post.excerpt | strip_html | strip }}</p>{%- endif -%}
+    </li>
+    {%- endfor -%}
+  </ul>
+  <p><a href="{{ '/archive/' | relative_url }}">All {{ site.posts.size }} articles in the archive &rarr;</a> &middot; <a href="{{ '/events/' | relative_url }}">Upcoming events</a></p>
 </div>

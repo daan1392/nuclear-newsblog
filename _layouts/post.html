@@ -1,49 +1,35 @@
 ---
 layout: default
 ---
-<div class="content">
-  <nav class="crumbs" aria-label="Breadcrumbs">
-    <a href="{{ '/' | relative_url }}">Home</a><span>/</span>
-    {%- if page.categories.first %}<a href="{{ '/topics/' | relative_url }}#{{ page.categories.first | slugify }}">{{ page.categories.first | escape }}</a><span>/</span>{% endif -%}
-    <span class="here">{{ page.title | truncate: 60 | escape }}</span>
-  </nav>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <article class="article" itemscope itemtype="http://schema.org/BlogPosting">
-    <header>
-      <p class="meta">
-        {%- if page.categories.first %}<a class="badge" href="{{ '/topics/' | relative_url }}#{{ page.categories.first | slugify }}">{{ page.categories.first | escape }}</a>{% endif -%}
-        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%-d %B %Y" }}</time>
-        {%- if page.countries and page.countries.size > 0 %}<span>&middot; {{ page.countries | join: ", " | escape }}</span>{% endif -%}
-      </p>
-      <h1 class="page-title" itemprop="name headline">{{ page.title | escape }}</h1>
-    </header>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%-d %B %Y" }}</time>
+      {%- if page.categories.first %} &middot; <a href="{{ '/topics/' | relative_url }}#{{ page.categories.first | slugify }}">{{ page.categories.first | escape }}</a>{% endif -%}
+      {%- if page.countries and page.countries.size > 0 %} &middot; {{ page.countries | join: ", " | escape }}{% endif -%}
+    </p>
+  </header>
 
-    <div class="prose" itemprop="articleBody">{{ content }}</div>
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
 
-    {%- assign cat = page.categories.first -%}
-    {%- if cat -%}
-    {%- assign related = site.categories[cat] | where_exp: "p", "p.url != page.url" | slice: 0, 4 -%}
-    {%- if related.size > 0 %}
-    <section class="related">
-      <h2>More in {{ cat | escape }}</h2>
-      <ul>
-        {%- for p in related %}
-        <li><a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a> <small>{{ p.date | date: "%-d %b %Y" }}</small></li>
-        {%- endfor %}
-      </ul>
-    </section>
-    {%- endif -%}
-    {%- endif %}
+  {%- assign cat = page.categories.first -%}
+  {%- if cat -%}
+  {%- assign related = site.categories[cat] | where_exp: "p", "p.url != page.url" | slice: 0, 4 -%}
+  {%- if related.size > 0 %}
+  <aside class="related">
+    <h2>More in {{ cat | escape }}</h2>
+    <ul>
+      {%- for p in related %}
+      <li><a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a> <small>{{ p.date | date: "%-d %b %Y" }}</small></li>
+      {%- endfor %}
+    </ul>
+  </aside>
+  {%- endif -%}
+  {%- endif %}
 
-    <nav class="pager" aria-label="Previous and next article">
-      {%- if page.previous.url %}
-      <a class="prev" href="{{ page.previous.url | relative_url }}"><small>&larr; Previous</small><span>{{ page.previous.title | escape }}</span></a>
-      {%- else %}<span></span>{% endif %}
-      {%- if page.next.url %}
-      <a class="next" href="{{ page.next.url | relative_url }}"><small>Next &rarr;</small><span>{{ page.next.title | escape }}</span></a>
-      {%- endif %}
-    </nav>
-  </article>
-
-  <aside class="toc" aria-label="On this page"><nav id="toc"></nav></aside>
-</div>
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>
