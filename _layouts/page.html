@@ -1,0 +1,15 @@
+---
+layout: default
+---
+<div class="content">
+  <nav class="crumbs" aria-label="Breadcrumbs">
+    <a href="{{ '/' | relative_url }}">Home</a><span>/</span><span class="here">{{ page.title | escape }}</span>
+  </nav>
+  <article class="article">
+    <h1 class="page-title">{{ page.title | escape }}</h1>
+    <div class="prose">{{ content }}</div>
+  </article>
+  {%- unless page.wide %}
+  <aside class="toc" aria-label="On this page"><nav id="toc"></nav></aside>
+  {%- endunless %}
+</div>

@@ -1,4 +1,4 @@
-﻿title: Nuclear Newswire
+title: Nuclear Newswire
 description: >-
   Daily, AI-written briefs on the nuclear sector — reactors, fuel, policy,
   research and industry. Every article links to its original sources and is
@@ -10,7 +10,6 @@ baseurl: "/nuclear-newsblog"
 home_country: BE   # country shown first on the Events page
 url: "https://daan1392.github.io"
 
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -18,8 +17,6 @@ plugins:
 permalink: /:year/:month/:day/:title/
 show_excerpts: true
 
-minima:
-  skin: auto
 
 header_pages:
   - topics.md
