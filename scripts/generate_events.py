@@ -134,7 +134,7 @@ def fetch_text(url: str) -> str:
                 charset = r.headers.get_content_charset() or "utf-8"
                 html = r.read().decode(charset, errors="replace")
             break
-        except urllib.error.HTTPError:
+        except (urllib.error.URLError, TimeoutError):  # HTTPError is a URLError
             if i == len(UAS) - 1:
                 raise
     p = _TextExtractor(url)
