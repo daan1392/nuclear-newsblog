@@ -82,3 +82,15 @@ A run sends ~20–60 short feed items and gets back up to 5 briefs — typically
 - The home page shows the 20 latest articles; **Archive** lists everything by month.
 - **Backfill:** *Actions → Generate articles → Run workflow*, and enter a date in `since` (e.g. `2026-09-01`). It covers that period week by week (feeds page back where possible, plus the World Nuclear News sitemap), dates each article by its sources, and opens a separate PR titled *Backfill articles*. Feeds only keep a few weeks of history, so older periods have thinner coverage.
 - Daily volume is set by `max_articles` in `scripts/feeds.yml` (now 12). Short feed items (IAEA, NRC) are enriched with text from the linked page before writing.
+
+## Events by country, submissions and automation (update)
+
+- **Events page** groups events by country (home country first, set with `home_country` in `_config.yml`), with a map, filters, per-event Google Calendar links, a subscribable `/events.ics` feed, `/events.json`, and schema.org `Event` markup. Country codes live in `_data/countries.yml`; event types are conference, summer-school, training, technical-visit, lecture, contest and social.
+- **Sources** are in `scripts/event_sources.yml` (BNS, SFEN, ANS, SCK CEN, ENS, ENEN). Set `default_country` for a national organiser. Nuclear Institute, IAEA and OECD/NEA cannot be read automatically (their pages are script-rendered or block bots); use the form below.
+- **Submit an event:** *Issues → New issue → Submit an event*. A workflow validates it and opens a PR (`scripts/issue_to_event.py`, `scripts/validate_events.py`).
+- **Auto-merge (optional):** set the repository variable `AUTO_MERGE_EVENTS` to `true` to merge event PRs automatically once validation passes. Off by default.
+- **Search** (`/search/`), related articles on each post, and a `countries` field on articles.
+- **Weekly roundup:** Sundays, compiled from the week's posts and upcoming events without a model call, opened as a PR.
+- **Link check:** Wednesdays, opens an issue if upcoming event links are dead.
+- **Spending guard:** `MAX_INPUT_TOKENS` (default 1,500,000) stops a run that would use too many tokens; each run prints its token usage in the job summary.
+- **PR_TOKEN:** without it, PRs opened by the bot don't trigger the *Check* workflows. Create a fine-grained token (Contents + Pull requests: read/write) and save it as the `PR_TOKEN` secret.
