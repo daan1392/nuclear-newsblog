@@ -173,14 +173,14 @@ def write_articles(items: list[dict], max_articles: int) -> list[dict]:
     user_msg = (
         f"Today is {datetime.now(timezone.utc):%Y-%m-%d}. Here are {len(items)} recent items. "
         f"Write at most {max_articles} briefs (fewer is fine if little is newsworthy; "
-        f"zero if nothing is). Call publish_articles with the result.\n\n{listing}"
+        f"zero if nothing is). You must respond by calling the publish_articles tool (with an empty list if nothing qualifies).\n\n{listing}"
     )
     resp = client.messages.create(
         model=MODEL,
         max_tokens=8000,
         system=SYSTEM_PROMPT,
         tools=[PUBLISH_TOOL],
-        tool_choice={"type": "tool", "name": "publish_articles"},
+        tool_choice={"type": "auto"},
         messages=[{"role": "user", "content": user_msg}],
     )
     for block in resp.content:
