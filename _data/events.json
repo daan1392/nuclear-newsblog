@@ -252,6 +252,20 @@
   "source": "American Nuclear Society"
  },
  {
+  "title": "TEST ONLY - Nuclear Institute Young Generation Network Annual Day",
+  "type": "conference",
+  "start_date": "2027-03-04",
+  "end_date": "2027-03-04",
+  "country": "GB",
+  "city": "London",
+  "organizer": "Nuclear Institute",
+  "url": "https://www.nuclearinst.com/events/events/ygn-annual-day-seminar-and-dinner-2025",
+  "deadline": "",
+  "summary": "Test submission to verify the event form workflow.",
+  "location": "London",
+  "source": "Community submission"
+ },
+ {
   "title": "ANS Student Conference 2027",
   "type": "conference",
   "start_date": "2027-04-08",
