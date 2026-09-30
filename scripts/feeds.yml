@@ -50,3 +50,10 @@ max_age_hours: 72
 max_articles: 12
 # Backfill mode: articles per chunk (a chunk is about one week of items).
 backfill_articles_per_chunk: 12
+
+# Sites that reject page requests from bots (403/429); their items are used as
+# the feed provides them instead of being enriched from the page.
+no_enrich_hosts:
+  - iaea.org
+  - phys.org
+  - medicalxpress.com
