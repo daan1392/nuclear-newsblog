@@ -51,6 +51,11 @@
     }
   }
 
+
+  // Pages without enough headings: drop the empty TOC column so content uses the full width
+  var aside = document.querySelector('aside.toc');
+  if (aside && !aside.querySelector('a')) aside.remove();
+
   // Back to top
   var top = document.getElementById('to-top');
   if (top) {
