@@ -40,3 +40,9 @@
   .ev-map, .ev-filters input, .ev-filters select, .ev-list .event { border-color: #3a4d3f; }
   .ev-type { background: #24352a; color: #b8dcc0; }
 }
+
+// --- search and related articles
+.search-box { width: 100%; padding: 10px 14px; font: inherit; border: 1px solid #c9d4c9; border-radius: 8px; margin-bottom: .5rem; }
+.related { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #c9d4c9; }
+.related h2 { font-size: 1.1rem; }
+@media (prefers-color-scheme: dark) { .search-box, .related { border-color: #3a4d3f; } }

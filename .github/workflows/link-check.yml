@@ -1,0 +1,29 @@
+name: Check event links
+
+on:
+  schedule:
+    - cron: "15 7 * * 3"   # Wednesdays 07:15 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check links
+        id: check
+        continue-on-error: true
+        shell: bash
+        run: python scripts/check_links.py | tee report.md
+      - name: Open an issue if links are dead
+        if: steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue create --title "Dead event links $(date -u +%Y-%m-%d)" --body-file report.md

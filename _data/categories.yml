@@ -22,3 +22,6 @@
   description: Nuclear safety, incidents, emergency preparedness, safeguards and security.
 - name: Industry
   description: Companies, contracts, supply chain, financing and workforce.
+- name: Weekly roundup
+  description: A digest of the week's articles and the events coming up. Generated automatically, never chosen by the editor model.
+  auto: false

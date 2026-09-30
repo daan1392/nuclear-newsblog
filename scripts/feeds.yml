@@ -17,6 +17,15 @@ feeds:
     url: https://www.nrc.gov/public-involve/rss?feed=news
   - name: IAEA News
     url: https://www.iaea.org/feeds/news
+  # --- national and European bodies (non-English feeds are translated by the editor)
+  - name: UK Nuclear Decommissioning Authority
+    url: https://www.gov.uk/government/organisations/nuclear-decommissioning-authority.atom
+  - name: SFEN (France)
+    url: https://www.sfen.org/feed/
+  - name: SFEN Revue generale nucleaire
+    url: https://www.sfen.org/rgn/feed/
+  - name: Nucleareurope
+    url: https://www.nucleareurope.eu/feed/
   # --- fusion
   - name: EUROfusion
     url: https://www.euro-fusion.org/feed/

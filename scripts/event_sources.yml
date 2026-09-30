@@ -13,9 +13,13 @@ sources:
   - name: SFEN (France)
     url: https://www.sfen.org/nos-evenements/
     default_country: FR
+  # Nuclear Institute (UK): the events list is not in the page HTML (it is filled
+  # in by scripts or behind a login), so nothing can be read automatically.
+  # Submit its events with the "Submit an event" form or re-enable if that changes.
   - name: Nuclear Institute (UK)
     url: https://www.nuclearinst.com/events-conferences/
     default_country: GB
+    enabled: false
   - name: American Nuclear Society
     url: https://www.ans.org/meetings/
     default_country: US

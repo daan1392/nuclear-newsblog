@@ -4,7 +4,7 @@ title: Events
 permalink: /events/
 ---
 
-Upcoming conferences, summer schools, trainings, lectures, technical visits, contests and community events in the nuclear sector, grouped by country. Collected weekly from the organisers' pages (BNS, SFEN, Nuclear Institute, ANS, SCK CEN, ENS, ENEN) and reviewed by a human before publication. Always confirm details and registration on the organiser's page.
+Upcoming conferences, summer schools, trainings, lectures, technical visits, contests and community events in the nuclear sector, grouped by country. Collected weekly from the organisers' pages (BNS, SFEN, ANS, SCK CEN, ENS, ENEN) plus community submissions and reviewed by a human before publication. Always confirm details and registration on the organiser's page.
 
 <p class="ev-actions">
 <a class="chip" href="{{ '/events.ics' | relative_url }}">Subscribe (calendar .ics)</a>

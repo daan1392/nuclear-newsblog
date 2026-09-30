@@ -24,6 +24,7 @@ minima:
 header_pages:
   - topics.md
   - archive.md
+  - search.md
   - events.md
   - about.md
 

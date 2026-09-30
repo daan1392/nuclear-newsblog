@@ -39,6 +39,9 @@ POSTS_DIR = ROOT / "_posts"
 MODEL = os.environ.get("NEWSBLOG_MODEL", "claude-sonnet-5-5")
 SEEN_LIMIT = 8000          # keep the dedup list from growing forever
 MAX_ITEMS_PER_CALL = 120   # items sent to the model in one request
+# Spending guard: a run stops calling the API once it has used this many input tokens.
+MAX_INPUT_TOKENS = int(os.environ.get("MAX_INPUT_TOKENS", "1500000"))
+TOKENS_IN = TOKENS_OUT = 0
 THIN_SUMMARY = 250         # feed summaries shorter than this get enriched from the page
 UAS = [
     "Mozilla/5.0 (compatible; NuclearNewswireBot/1.0)",
@@ -52,8 +55,9 @@ def load_categories() -> list[dict]:
 
 
 CATEGORIES = load_categories()
-CATEGORY_NAMES = [c["name"] for c in CATEGORIES]
-CATEGORY_HELP = "\n".join(f"  - {c['name']}: {c['description']}" for c in CATEGORIES)
+CATEGORY_NAMES = [c["name"] for c in CATEGORIES if c.get("auto", True)]
+CATEGORY_HELP = "\n".join(
+    f"  - {c['name']}: {c['description']}" for c in CATEGORIES if c.get("auto", True))
 
 SYSTEM_PROMPT = f"""You are the editor of "Nuclear Newswire", a news blog covering the
 nuclear sector: power reactors and SMRs, nuclear medicine and isotopes, NORM and
@@ -102,6 +106,10 @@ PUBLISH_TOOL = {
                         "summary": {"type": "string", "description": "One-sentence teaser for the index page."},
                         "category": {"type": "string", "enum": CATEGORY_NAMES},
                         "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 6},
+                        "countries": {
+                            "type": "array", "items": {"type": "string"}, "maxItems": 3,
+                            "description": "Main countries the story is about (English names, e.g. Belgium, United States); empty if none or global.",
+                        },
                         "body": {"type": "string", "description": "Markdown body, no title, no sources list."},
                         "source_ids": {
                             "type": "array",
@@ -342,6 +350,10 @@ def write_articles(items: list[dict], max_articles: int) -> list[dict]:
         f"tense where the events are past. You must respond by calling the publish_articles "
         f"tool (with an empty list if nothing qualifies).\n\n{listing}"
     )
+    global TOKENS_IN, TOKENS_OUT
+    if TOKENS_IN > MAX_INPUT_TOKENS:
+        raise RuntimeError(f"Stopping: {TOKENS_IN} input tokens used, above the MAX_INPUT_TOKENS guard "
+                           f"({MAX_INPUT_TOKENS}). Raise the environment variable to allow more.")
     resp = client.messages.create(
         model=MODEL,
         max_tokens=16000,
@@ -350,6 +362,8 @@ def write_articles(items: list[dict], max_articles: int) -> list[dict]:
         tool_choice={"type": "auto"},
         messages=[{"role": "user", "content": user_msg}],
     )
+    TOKENS_IN += resp.usage.input_tokens
+    TOKENS_OUT += resp.usage.output_tokens
     for block in resp.content:
         if block.type == "tool_use" and block.name == "publish_articles":
             return block.input.get("articles", [])[:max_articles]
@@ -373,6 +387,7 @@ title: {yaml_str(article['title'])}
 date: {when:%Y-%m-%d %H:%M:%S} +0000
 categories: [{yaml_str(article['category'])}]
 tags: [{tags}]
+countries: [{", ".join(yaml_str(c) for c in article.get("countries", []))}]
 excerpt: {yaml_str(article['summary'])}
 ai_generated: true
 model: {MODEL}
@@ -451,7 +466,12 @@ def main() -> int:
         # so the same items aren't reconsidered tomorrow.
         seen += [it["link"] for it in chunk]
         save_seen(seen)
-    print(f"{written} article(s) written")
+    print(f"{written} article(s) written; tokens used: {TOKENS_IN} in, {TOKENS_OUT} out")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        with open(summary, "a", encoding="utf-8") as f:
+            f.write(f"### Articles run\n{written} article(s) written from {len(items)} candidate item(s); "
+                    f"{TOKENS_IN:,} input / {TOKENS_OUT:,} output tokens.\n")
     return 0
 
 

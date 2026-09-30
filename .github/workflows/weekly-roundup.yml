@@ -1,0 +1,40 @@
+name: Weekly roundup
+
+on:
+  schedule:
+    - cron: "30 17 * * 0"   # Sundays 17:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  roundup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Compile the roundup
+        run: python scripts/weekly_roundup.py
+      - name: Validate
+        run: python scripts/validate_posts.py
+      - name: Today's date
+        id: date
+        run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.PR_TOKEN || secrets.GITHUB_TOKEN }}
+          branch: articles/roundup-${{ steps.date.outputs.today }}
+          commit-message: "Weekly roundup ${{ steps.date.outputs.today }}"
+          title: "🗞 Weekly roundup — ${{ steps.date.outputs.today }}"
+          body: |
+            Digest of this week's published articles and upcoming events. It is compiled
+            from the site's own front matter, with no new text written by a model.
+          labels: articles
+          add-paths: _posts/*.md
+          delete-branch: true
