@@ -1,0 +1,11 @@
+{%- assign items = upcoming | where: "country", include.code -%}
+{%- if items.size > 0 -%}
+<section class="ev-country" data-country="{{ include.code }}" id="c-{{ include.code | downcase }}">
+<h2>{{ include.name }} <small>({{ items.size }})</small></h2>
+<ul class="ev-list">
+{%- for e in items -%}
+{% include event-item.html e=e %}
+{%- endfor -%}
+</ul>
+</section>
+{%- endif -%}

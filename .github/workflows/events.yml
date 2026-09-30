@@ -16,6 +16,7 @@ concurrency:
 jobs:
   events:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -29,13 +30,27 @@ jobs:
       - name: Extract events with Claude
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/generate_events.py
+        run: python scripts/generate_events.py 2>&1 | tee events.log
+
+      - name: Validate
+        run: python scripts/validate_events.py
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Events run"
+            echo '```'
+            grep -E "characters|warning|note:|^\+|new event|tokens" events.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Today's date
         id: date
         run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
       - name: Open pull request
+        id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.PR_TOKEN || secrets.GITHUB_TOKEN }}
@@ -43,12 +58,12 @@ jobs:
           commit-message: "Update events ${{ steps.date.outputs.today }}"
           title: "📅 Events update — ${{ steps.date.outputs.today }}"
           body: |
-            Automatically extracted upcoming events (summer schools, trainings,
-            technical visits, social events) from the organisers' pages.
+            Automatically extracted events (conferences, schools, trainings, lectures,
+            technical visits, contests, social) from the organisers' pages.
 
             **Review checklist**
             - [ ] Dates, places and links match the organiser's page
-            - [ ] Event types make sense
+            - [ ] Country codes are right
             - [ ] Nothing that isn't really an event
 
             Edit `_data/events.json` in this PR to fix or remove entries, then merge to publish.
@@ -56,3 +71,12 @@ jobs:
           add-paths: |
             _data/events.json
           delete-branch: true
+
+      # Opt-in: set the repository variable AUTO_MERGE_EVENTS to "true" to merge
+      # event PRs automatically once validation has passed. Off by default so a
+      # human still reviews what the model extracted.
+      - name: Auto-merge (if enabled)
+        if: vars.AUTO_MERGE_EVENTS == 'true' && steps.cpr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.PR_TOKEN || secrets.GITHUB_TOKEN }}
+        run: gh pr merge "${{ steps.cpr.outputs.pull-request-number }}" --squash --delete-branch

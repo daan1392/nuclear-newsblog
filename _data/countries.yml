@@ -1,0 +1,61 @@
+# ISO 3166-1 alpha-2 codes with approximate centroid (used for the events map).
+# ONLINE and UNKNOWN are special values used by the events data.
+- {code: BE, name: Belgium, lat: 50.6, lon: 4.6}
+- {code: FR, name: France, lat: 46.6, lon: 2.4}
+- {code: DE, name: Germany, lat: 51.1, lon: 10.4}
+- {code: NL, name: Netherlands, lat: 52.2, lon: 5.6}
+- {code: LU, name: Luxembourg, lat: 49.8, lon: 6.1}
+- {code: GB, name: United Kingdom, lat: 54.0, lon: -2.5}
+- {code: IE, name: Ireland, lat: 53.2, lon: -8.0}
+- {code: ES, name: Spain, lat: 40.2, lon: -3.6}
+- {code: PT, name: Portugal, lat: 39.6, lon: -8.0}
+- {code: IT, name: Italy, lat: 42.8, lon: 12.5}
+- {code: CH, name: Switzerland, lat: 46.8, lon: 8.2}
+- {code: AT, name: Austria, lat: 47.6, lon: 14.1}
+- {code: SE, name: Sweden, lat: 62.0, lon: 15.0}
+- {code: FI, name: Finland, lat: 64.5, lon: 26.0}
+- {code: NO, name: Norway, lat: 61.0, lon: 9.0}
+- {code: DK, name: Denmark, lat: 56.0, lon: 10.0}
+- {code: PL, name: Poland, lat: 52.0, lon: 19.4}
+- {code: CZ, name: Czechia, lat: 49.8, lon: 15.5}
+- {code: SK, name: Slovakia, lat: 48.7, lon: 19.5}
+- {code: HU, name: Hungary, lat: 47.2, lon: 19.5}
+- {code: RO, name: Romania, lat: 45.9, lon: 25.0}
+- {code: BG, name: Bulgaria, lat: 42.7, lon: 25.5}
+- {code: SI, name: Slovenia, lat: 46.1, lon: 14.8}
+- {code: HR, name: Croatia, lat: 45.1, lon: 15.2}
+- {code: RS, name: Serbia, lat: 44.0, lon: 21.0}
+- {code: UA, name: Ukraine, lat: 49.0, lon: 32.0}
+- {code: LT, name: Lithuania, lat: 55.3, lon: 23.9}
+- {code: LV, name: Latvia, lat: 56.9, lon: 24.6}
+- {code: EE, name: Estonia, lat: 58.7, lon: 25.5}
+- {code: GR, name: Greece, lat: 39.0, lon: 22.0}
+- {code: TR, name: Turkey, lat: 39.0, lon: 35.0}
+- {code: RU, name: Russia, lat: 61.5, lon: 60.0}
+- {code: US, name: United States, lat: 39.5, lon: -98.4}
+- {code: CA, name: Canada, lat: 56.0, lon: -96.0}
+- {code: MX, name: Mexico, lat: 23.6, lon: -102.5}
+- {code: BR, name: Brazil, lat: -10.0, lon: -52.0}
+- {code: AR, name: Argentina, lat: -34.0, lon: -64.0}
+- {code: CL, name: Chile, lat: -30.0, lon: -71.0}
+- {code: CN, name: China, lat: 35.0, lon: 103.0}
+- {code: JP, name: Japan, lat: 36.2, lon: 138.2}
+- {code: KR, name: South Korea, lat: 36.5, lon: 127.8}
+- {code: TW, name: Taiwan, lat: 23.7, lon: 121.0}
+- {code: IN, name: India, lat: 22.0, lon: 79.0}
+- {code: PK, name: Pakistan, lat: 30.0, lon: 70.0}
+- {code: BD, name: Bangladesh, lat: 23.7, lon: 90.3}
+- {code: ID, name: Indonesia, lat: -2.5, lon: 118.0}
+- {code: MY, name: Malaysia, lat: 4.2, lon: 102.0}
+- {code: TH, name: Thailand, lat: 15.0, lon: 101.0}
+- {code: VN, name: Vietnam, lat: 16.0, lon: 106.0}
+- {code: AE, name: United Arab Emirates, lat: 24.0, lon: 54.0}
+- {code: SA, name: Saudi Arabia, lat: 24.0, lon: 45.0}
+- {code: JO, name: Jordan, lat: 31.0, lon: 36.5}
+- {code: IL, name: Israel, lat: 31.5, lon: 34.8}
+- {code: EG, name: Egypt, lat: 26.5, lon: 30.0}
+- {code: ZA, name: South Africa, lat: -29.0, lon: 24.0}
+- {code: GH, name: Ghana, lat: 7.9, lon: -1.0}
+- {code: KE, name: Kenya, lat: 0.0, lon: 38.0}
+- {code: AU, name: Australia, lat: -25.0, lon: 134.0}
+- {code: NZ, name: New Zealand, lat: -41.0, lon: 172.0}

@@ -1,20 +1,37 @@
-# Web pages the events generator reads (summer schools, trainings, technical
-# visits, social events). Pages are fetched as text and Claude extracts the
-# upcoming events. A page that fails to load is skipped with a warning.
+# Web pages the events generator reads (conferences, summer schools, trainings,
+# lectures, technical visits, contests, social events). Pages are fetched as
+# text and Claude extracts the upcoming events. A page that fails to load is
+# skipped with a warning.
+#
+# default_country: ISO code used when a listing gives no place (the organiser's
+# home country). Leave it out for international organisers.
 sources:
+  # --- national societies and organisers
   - name: Belgian Nuclear Society
     url: https://bnsorg.be/events/upcoming-events/
-  - name: European Nuclear Society
-    url: https://www.euronuclear.org/events/
+    default_country: BE
+  - name: SFEN (France)
+    url: https://www.sfen.org/nos-evenements/
+    default_country: FR
+  - name: Nuclear Institute (UK)
+    url: https://www.nuclearinst.com/events-conferences/
+    default_country: GB
+  - name: American Nuclear Society
+    url: https://www.ans.org/meetings/
+    default_country: US
   - name: SCK CEN
     url: https://www.sckcen.be/en/events-courses
+    default_country: BE
+  # --- European / international
+  - name: European Nuclear Society
+    url: https://www.euronuclear.org/events/
   - name: ENEN
     url: https://enen.eu/
   - name: ENEN Education & Training
     url: https://enen.eu/index.php/category/education-and-training/
   # IAEA and OECD/NEA block automated requests (HTTP 403 for every client), so
-  # they are disabled. Add their events by hand in _data/events.json, or enable
-  # these if they ever open up.
+  # they are disabled. Add their events by hand in _data/events.json or through
+  # the "Submit an event" issue form, or enable these if they ever open up.
   - name: IAEA
     url: https://www.iaea.org/events
     enabled: false
@@ -22,5 +39,4 @@ sources:
     url: https://www.oecd-nea.org/jcms/pl_20/events
     enabled: false
   # LinkedIn (BNS Young Generation) cannot be fetched automatically: it needs a
-  # login and scraping is against LinkedIn's terms. Add those events by hand in
-  # _data/events.json, or open a PR / issue with the link.
+  # login and scraping is against LinkedIn's terms. Use the issue form instead.

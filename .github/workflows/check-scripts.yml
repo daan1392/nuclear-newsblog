@@ -4,12 +4,16 @@ on:
   push:
     paths:
       - "scripts/**"
+      - "_data/**"
+      - "_posts/**"
   pull_request:
     paths:
       - "scripts/**"
+      - "_data/**"
+      - "_posts/**"
 
 jobs:
-  compile:
+  checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,5 +23,12 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Syntax check
         run: python -m py_compile scripts/*.py
+      - name: Validate data files
+        run: |
+          python -c "import yaml,json; [yaml.safe_load(open(f, encoding='utf-8')) for f in ('_data/categories.yml','_data/countries.yml','scripts/feeds.yml','scripts/event_sources.yml')]; json.load(open('_data/events.json', encoding='utf-8')); json.load(open('_data/seen.json', encoding='utf-8'))"
+      - name: Validate events
+        run: python scripts/validate_events.py
+      - name: Validate posts
+        run: python scripts/validate_posts.py
       - name: Fetch and parse feeds (no API call)
         run: python scripts/generate_articles.py --dry-run | tail -15

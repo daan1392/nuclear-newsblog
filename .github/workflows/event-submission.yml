@@ -1,0 +1,51 @@
+name: Event submission
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  submit:
+    if: contains(github.event.issue.labels.*.name, 'event-submission')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Add the event
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: python scripts/issue_to_event.py
+      - name: Validate
+        run: python scripts/validate_events.py
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.PR_TOKEN || secrets.GITHUB_TOKEN }}
+          branch: events/submission-${{ github.event.issue.number }}
+          commit-message: "Add submitted event (#${{ github.event.issue.number }})"
+          title: "📅 Event submission #${{ github.event.issue.number }}"
+          body: |
+            Submitted via the event form in #${{ github.event.issue.number }}.
+
+            - [ ] Dates, place and link are correct
+            - [ ] It is a genuine nuclear-sector event
+
+            Closes #${{ github.event.issue.number }}
+          labels: events
+          add-paths: _data/events.json
+          delete-branch: true
+      - name: Tell the submitter if something was invalid
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          gh issue comment "${{ github.event.issue.number }}" --repo "${{ github.repository }}"
+          --body "Sorry, this submission could not be processed automatically (check the dates as YYYY-MM-DD, a two-letter country code such as BE, and an https link). Please edit the issue or open a new one. Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

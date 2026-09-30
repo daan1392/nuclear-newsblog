@@ -1,0 +1,12 @@
+{%- assign e = include.e -%}
+{%- assign kind = e.type | replace: "-", " " | capitalize -%}
+{%- assign place = e.city -%}
+{%- if place == "" or place == nil %}{% assign place = e.location %}{% endif -%}
+<li class="event" data-country="{{ e.country }}" data-type="{{ e.type }}" data-text="{{ e.title | append: ' ' | append: e.organizer | append: ' ' | append: place | downcase | escape }}">
+  <span class="ev-type ev-{{ e.type }}">{{ kind }}</span>
+  <strong><a href="{{ e.url }}" rel="noopener">{{ e.title | escape }}</a></strong><br>
+  <span class="ev-meta">{{ e.start_date | date: "%-d %b %Y" }}{% if e.end_date != e.start_date %} &ndash; {{ e.end_date | date: "%-d %b %Y" }}{% endif %}{% if place and place != "" %} &middot; {{ place | escape }}{% endif %}{% if include.show_country %} &middot; {{ include.country_name }}{% endif %}{% if e.deadline and e.deadline != "" %} &middot; register by {{ e.deadline | date: "%-d %b %Y" }}{% endif %}</span><br>
+  {{ e.summary | escape }} <em>({{ e.organizer | escape }})</em>
+  {%- capture gdates %}{{ e.start_date | date: "%Y%m%d" }}/{{ e.end_date | date: "%s" | plus: 86400 | date: "%Y%m%d" }}{% endcapture %}
+  <a class="ev-cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text={{ e.title | uri_escape }}&amp;dates={{ gdates }}&amp;location={{ place | uri_escape }}&amp;details={{ e.url | uri_escape }}" rel="noopener">+ Calendar</a>
+</li>

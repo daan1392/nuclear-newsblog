@@ -7,6 +7,7 @@ author: Daan
 # For a project site (https://<user>.github.io/<repo>/) set baseurl to "/<repo>".
 # For a user site (repo named <user>.github.io) leave it empty.
 baseurl: "/nuclear-newsblog"
+home_country: BE   # country shown first on the Events page
 url: "https://daan1392.github.io"
 
 theme: minima

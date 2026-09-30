@@ -1,0 +1,19 @@
+---
+permalink: /events.ics
+---
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nuclear Newswire//Events//EN
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Nuclear Newswire events
+{% for e in site.data.events %}{% assign place = e.city %}{% if place == "" or place == nil %}{% assign place = e.location %}{% endif %}BEGIN:VEVENT
+UID:{{ e.url | slugify }}@nuclear-newswire
+DTSTAMP:{{ site.time | date: "%Y%m%dT%H%M%SZ" }}
+DTSTART;VALUE=DATE:{{ e.start_date | date: "%Y%m%d" }}
+DTEND;VALUE=DATE:{{ e.end_date | date: "%s" | plus: 86400 | date: "%Y%m%d" }}
+SUMMARY:{{ e.title | replace: "\", "\\" | replace: ",", "\," | replace: ";", "\;" }}
+LOCATION:{{ place | replace: ",", "\," }}{% if e.country != "" %}{% if place != "" %}\, {% endif %}{{ e.country }}{% endif %}
+DESCRIPTION:{{ e.summary | replace: "\", "\\" | replace: ",", "\," | replace: ";", "\;" }}\n{{ e.url }}
+URL:{{ e.url }}
+END:VEVENT
+{% endfor %}END:VCALENDAR

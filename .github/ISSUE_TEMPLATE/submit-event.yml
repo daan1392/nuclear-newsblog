@@ -1,0 +1,71 @@
+name: Submit an event
+description: Suggest a nuclear-sector event for the Events page (conference, school, training, lecture, visit, contest, social).
+title: "Event: "
+labels: ["event-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! A pull request is opened automatically from this form and reviewed before it goes live.
+  - type: input
+    id: title
+    attributes:
+      label: Title
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options: [conference, summer-school, training, technical-visit, lecture, contest, social]
+    validations:
+      required: true
+  - type: input
+    id: start_date
+    attributes:
+      label: Start date
+      description: YYYY-MM-DD
+    validations:
+      required: true
+  - type: input
+    id: end_date
+    attributes:
+      label: End date
+      description: YYYY-MM-DD (same as start for a single day)
+    validations:
+      required: true
+  - type: input
+    id: country
+    attributes:
+      label: Country code
+      description: Two-letter ISO code (BE, FR, GB, US ...) or ONLINE
+    validations:
+      required: true
+  - type: input
+    id: city
+    attributes:
+      label: City
+  - type: input
+    id: organizer
+    attributes:
+      label: Organiser
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Link to the event page
+      description: https://...
+    validations:
+      required: true
+  - type: input
+    id: deadline
+    attributes:
+      label: Registration or abstract deadline (optional)
+      description: YYYY-MM-DD
+  - type: textarea
+    id: summary
+    attributes:
+      label: One-sentence description
+    validations:
+      required: true
