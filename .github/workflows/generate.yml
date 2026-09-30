@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "17 6 * * *"   # daily at 06:17 UTC
   workflow_dispatch:        # "Run workflow" button for manual runs
+    inputs:
+      since:
+        description: "Backfill: cover everything published since this date (YYYY-MM-DD). Leave empty for the normal daily run."
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -16,6 +21,9 @@ concurrency:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      SINCE: ${{ inputs.since }}
     steps:
       - uses: actions/checkout@v4
 
@@ -29,7 +37,12 @@ jobs:
       - name: Write articles with Claude
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/generate_articles.py
+        run: |
+          if [ -n "$SINCE" ]; then
+            python scripts/generate_articles.py --since "$SINCE"
+          else
+            python scripts/generate_articles.py
+          fi
 
       - name: Validate
         run: python scripts/validate_posts.py
@@ -44,11 +57,11 @@ jobs:
           # A personal access token (secret PR_TOKEN) lets the PR trigger the
           # "Check posts" workflow; the default token cannot trigger workflows.
           token: ${{ secrets.PR_TOKEN || secrets.GITHUB_TOKEN }}
-          branch: articles/${{ steps.date.outputs.today }}
+          branch: ${{ inputs.since && format('articles/backfill-{0}', steps.date.outputs.today) || format('articles/{0}', steps.date.outputs.today) }}
           commit-message: "New articles for ${{ steps.date.outputs.today }}"
-          title: "📰 New articles — ${{ steps.date.outputs.today }}"
+          title: ${{ inputs.since && format('📚 Backfill articles since {0}', inputs.since) || format('📰 New articles — {0}', steps.date.outputs.today) }}
           body: |
-            Automatically generated briefs from today's nuclear-sector feeds.
+            Automatically generated briefs from nuclear-sector feeds.
 
             **Review checklist**
             - [ ] Facts match the linked sources

@@ -1,21 +1,52 @@
 # News feeds the generator reads. Add, remove or disable freely.
 # A feed that fails to load is skipped with a warning; it never breaks the run.
+# `paged: true` marks WordPress-style feeds that accept ?paged=N; they are only
+# paged deeper in backfill mode (--since).
 feeds:
+  # --- nuclear power and general nuclear news
   - name: World Nuclear News
     url: https://www.world-nuclear-news.org/rss
-  - name: IAEA News
-    url: https://www.iaea.org/feeds/topnews
   - name: ANS Nuclear Newswire
     url: https://www.ans.org/news/feed/
+  - name: POWER Magazine (nuclear)
+    url: https://www.powermag.com/category/nuclear/feed/
+    paged: true
+  - name: US DOE Office of Nuclear Energy
+    url: https://www.energy.gov/ne/rss.xml
   - name: US NRC News
     url: https://www.nrc.gov/public-involve/rss?feed=news
+  - name: IAEA News
+    url: https://www.iaea.org/feeds/news
+  # --- fusion
+  - name: EUROfusion
+    url: https://www.euro-fusion.org/feed/
+    paged: true
+  # --- research, medicine, radiation (broader science feeds; the editor skips off-topic items)
+  - name: Phys.org nuclear physics
+    url: https://phys.org/rss-feed/physics-news/nuclear-physics/
+  - name: MedicalXpress nuclear medicine
+    url: https://medicalxpress.com/rss-feed/search/?search=nuclear+medicine
+  - name: Phys.org radioactivity and radiation
+    url: https://phys.org/rss-feed/search/?search=radiation+protection
+  # --- disabled
   - name: NEI Magazine
     url: https://www.neimagazine.com/rss/
+    enabled: false   # feed has not been updated since March 2026
   - name: SCK CEN
     url: https://www.sckcen.be/en/rss.xml
-    enabled: false   # enable once you've confirmed the feed URL
+    enabled: false   # no RSS feed at this URL
 
-# Only items published within this many hours are considered.
-max_age_hours: 48
-# Upper bound on articles per run (keeps PRs reviewable and API cost predictable).
-max_articles: 5
+# Extra archive sources used only in backfill mode (--since): a sitemap lists
+# articles with a last-modified date; each page is fetched for its text.
+backfill_sitemaps:
+  - name: World Nuclear News
+    url: https://www.world-nuclear-news.org/sitemap.xml
+    include: /articles/
+    host: www.world-nuclear-news.org   # rewrite links to the host the RSS feed uses
+
+# Only items published within this many hours are considered in the daily run.
+max_age_hours: 72
+# Upper bound on articles per daily run (keeps PRs reviewable and API cost predictable).
+max_articles: 12
+# Backfill mode: articles per chunk (a chunk is about one week of items).
+backfill_articles_per_chunk: 12

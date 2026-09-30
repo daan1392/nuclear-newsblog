@@ -1,0 +1,24 @@
+# Topic categories. Used by the article generator (allowed values), the post
+# validator, and the Topics page. Keep `name` identical to what posts use.
+- name: Nuclear power
+  description: Power reactors, SMRs, new build, operations, life extensions, grid and markets for nuclear electricity.
+- name: Nuclear medicine
+  description: Medical isotopes, radiopharmaceuticals, imaging, radiotherapy and theranostics.
+- name: NORM & radiation protection
+  description: Naturally occurring radioactive material, radon, dosimetry, exposure limits and radiation protection practice.
+- name: Waste & decommissioning
+  description: Radioactive waste, geological disposal, spent fuel storage, decommissioning and site clean-up.
+- name: Fuel cycle
+  description: Uranium mining, conversion, enrichment, fuel fabrication and reprocessing.
+- name: Fusion
+  description: Magnetic and inertial confinement fusion, ITER, private fusion ventures.
+- name: Research
+  description: Research reactors, nuclear physics, materials and science results.
+- name: Policy
+  description: Government strategy, funding, international agreements and public debate.
+- name: Regulation
+  description: Licensing, permits, regulators and rule-making.
+- name: Safety & security
+  description: Nuclear safety, incidents, emergency preparedness, safeguards and security.
+- name: Industry
+  description: Companies, contracts, supply chain, financing and workforce.

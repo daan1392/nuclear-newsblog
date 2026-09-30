@@ -21,6 +21,8 @@ minima:
   skin: auto
 
 header_pages:
+  - topics.md
+  - archive.md
   - events.md
   - about.md
 

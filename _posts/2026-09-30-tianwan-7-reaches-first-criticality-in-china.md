@@ -2,7 +2,7 @@
 layout: post
 title: "Tianwan 7 reaches first criticality in China"
 date: 2026-09-30 12:00:13 +0000
-categories: ["Reactors"]
+categories: ["Nuclear power"]
 tags: ["Tianwan", "China", "Criticality", "New build"]
 excerpt: "The new unit at the Tianwan nuclear plant has started a self-sustaining chain reaction and is at its minimum controllable power level."
 ai_generated: true

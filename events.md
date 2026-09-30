@@ -8,7 +8,7 @@ Upcoming summer schools, trainings, technical visits and community events in the
 
 {% assign today = site.time | date: "%Y-%m-%d" %}
 {% assign upcoming = site.data.events | where_exp: "e", "e.end_date >= today" | sort: "start_date" %}
-{% assign groups = "summer-school|Summer schools,training|Trainings and courses,technical-visit|Technical visits,social|Social and fun" | split: "," %}
+{% assign groups = "summer-school|Summer schools,training|Trainings and courses,lecture|Evening lectures and seminars,contest|Science contests,technical-visit|Technical visits,social|Social and fun" | split: "," %}
 
 {% if upcoming.size == 0 %}
 *No upcoming events listed right now. Check back after the next weekly update.*

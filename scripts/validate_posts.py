@@ -13,6 +13,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 REQUIRED = ("title", "date", "categories", "sources")
 NAME_RE = re.compile(r"^\d{4}-\d{2}-\d{2}-[a-z0-9-]+\.md$")
+CATEGORIES = {c["name"] for c in yaml.safe_load((ROOT / "_data" / "categories.yml").read_text(encoding="utf-8"))}
 
 
 def check(path: Path) -> list[str]:
@@ -31,6 +32,12 @@ def check(path: Path) -> list[str]:
     for key in REQUIRED:
         if not fm.get(key):
             errs.append(f"front matter missing '{key}'")
+    cats = fm.get("categories") or []
+    if isinstance(cats, str):
+        cats = [cats]
+    for c in cats:
+        if c not in CATEGORIES:
+            errs.append(f"unknown category '{c}' (see _data/categories.yml)")
     for s in fm.get("sources") or []:
         if not str(s.get("url", "")).startswith("http"):
             errs.append(f"source without a valid url: {s}")

@@ -1,0 +1,6 @@
+<p class="topic-chips">
+{%- for c in site.data.categories -%}
+  {%- assign n = site.categories[c.name].size | default: 0 -%}
+  <a class="chip" href="{{ '/topics/' | relative_url }}#{{ c.name | slugify }}" title="{{ c.description | escape }}">{{ c.name | escape }}{% if n > 0 %} <span class="chip-n">{{ n }}</span>{% endif %}</a>
+{%- endfor -%}
+</p>

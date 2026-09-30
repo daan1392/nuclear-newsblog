@@ -75,3 +75,10 @@ A run sends ~20–60 short feed items and gets back up to 5 briefs — typically
 
 - IAEA and OECD/NEA block automated requests, and LinkedIn cannot be scraped, so add events from those by hand to `_data/events.json` (fields: `title`, `type` = `summer-school` | `training` | `technical-visit` | `social`, `start_date`, `end_date`, `location`, `organizer`, `summary`, `url`, `source`). Hand-added entries are kept.
 - Test fetching locally with `python scripts/generate_events.py --dry-run`.
+
+## Topics, archive and backfill
+
+- Categories live in `_data/categories.yml` (nuclear power, nuclear medicine, NORM & radiation protection, waste & decommissioning, fuel cycle, fusion, research, policy, regulation, safety & security, industry). The generator, the validator and the **Topics** page all read that file; add a category there and it is available everywhere.
+- The home page shows the 20 latest articles; **Archive** lists everything by month.
+- **Backfill:** *Actions → Generate articles → Run workflow*, and enter a date in `since` (e.g. `2026-09-01`). It covers that period week by week (feeds page back where possible, plus the World Nuclear News sitemap), dates each article by its sources, and opens a separate PR titled *Backfill articles*. Feeds only keep a few weeks of history, so older periods have thinner coverage.
+- Daily volume is set by `max_articles` in `scripts/feeds.yml` (now 12). Short feed items (IAEA, NRC) are enriched with text from the linked page before writing.

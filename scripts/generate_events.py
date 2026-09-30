@@ -32,7 +32,7 @@ EVENTS_FILE = ROOT / "_data" / "events.json"
 
 MODEL = os.environ.get("NEWSBLOG_MODEL", "claude-sonnet-5-5")
 PAGE_CHARS = 20000  # per-page cap sent to the model
-TYPES = ["summer-school", "training", "technical-visit", "social"]
+TYPES = ["summer-school", "training", "technical-visit", "lecture", "contest", "social"]
 # Some sites reject one style of user agent and accept the other; try both.
 UAS = [
     "Mozilla/5.0 (compatible; NuclearNewswireBot/1.0)",
@@ -45,9 +45,11 @@ nuclear-sector blog. You receive the text of event/news pages from nuclear
 organisations (links appear as [text](url)). Extract UPCOMING events of these
 types:
 - summer-school: summer/winter schools, PhD/academic schools, courses run as a school
-- training: trainings, courses, workshops, webinars with a learning goal
+- training: trainings, courses, workshops (incl. "Workshops" listings), webinars with a learning goal
 - technical-visit: site visits, facility tours, technical visits
-- social: networking, fun and community events (drinks, sports, quizzes, get-togethers)
+- lecture: evening lectures, seminars, colloquia and talks
+- contest: science contests, competitions and quizzes with a scientific angle
+- social: networking, fun and community events (drinks, "Nuclear Cafes", sports, quizzes, get-togethers)
 Skip big scientific conferences unless they include a school/training/visit part,
 skip anything already past, and skip items without a clear date.
 
