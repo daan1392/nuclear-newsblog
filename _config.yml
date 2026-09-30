@@ -1,4 +1,4 @@
-title: Nuclear Newswire
+﻿title: Nuclear Newswire
 description: >-
   Daily, AI-written briefs on the nuclear sector — reactors, fuel, policy,
   research and industry. Every article links to its original sources and is
@@ -6,8 +6,8 @@ description: >-
 author: Daan
 # For a project site (https://<user>.github.io/<repo>/) set baseurl to "/<repo>".
 # For a user site (repo named <user>.github.io) leave it empty.
-baseurl: ""
-url: ""
+baseurl: "/nuclear-newsblog"
+url: "https://daan1392.github.io"
 
 theme: minima
 plugins:
