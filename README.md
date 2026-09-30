@@ -37,7 +37,7 @@ No new stories → no PR. Unmerged PRs can simply be closed; their items stay ma
 | Articles per day, look-back window | `max_articles`, `max_age_hours` in `scripts/feeds.yml` |
 | Schedule | `cron` in `.github/workflows/generate.yml` |
 | Editorial voice and rules | `SYSTEM_PROMPT` in `scripts/generate_articles.py` |
-| Model | `NEWSBLOG_MODEL` env var (default `claude-sonnet-5-5`) |
+| Model | `NEWSBLOG_MODEL` env var (default `claude-haiku-4-5-20251001`) |
 | Site title, theme | `_config.yml` |
 
 Check the feed URLs once with a dry run — some outlets move their RSS endpoints:

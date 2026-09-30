@@ -36,7 +36,7 @@ CATEGORIES_FILE = ROOT / "_data" / "categories.yml"
 SEEN_FILE = ROOT / "_data" / "seen.json"
 POSTS_DIR = ROOT / "_posts"
 
-MODEL = os.environ.get("NEWSBLOG_MODEL", "claude-sonnet-5-5")
+MODEL = os.environ.get("NEWSBLOG_MODEL", "claude-haiku-4-5-20251001")
 SEEN_LIMIT = 8000          # keep the dedup list from growing forever
 MAX_ITEMS_PER_CALL = 120   # items sent to the model in one request
 # Spending guard: a run stops calling the API once it has used this many input tokens.

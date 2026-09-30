@@ -33,7 +33,7 @@ SOURCES_FILE = ROOT / "scripts" / "event_sources.yml"
 COUNTRIES_FILE = ROOT / "_data" / "countries.yml"
 EVENTS_FILE = ROOT / "_data" / "events.json"
 
-MODEL = os.environ.get("NEWSBLOG_MODEL", "claude-sonnet-5-5")
+MODEL = os.environ.get("NEWSBLOG_MODEL", "claude-haiku-4-5-20251001")
 PAGE_CHARS = 20000     # per-page cap sent to the model
 RETENTION_DAYS = 90    # keep finished events this long (shown under "recently past")
 TYPES = ["conference", "summer-school", "training", "technical-visit", "lecture", "contest", "social"]
