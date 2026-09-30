@@ -174,7 +174,7 @@ def fetch_text(url: str) -> str:
 
 def load_events() -> list[dict]:
     if EVENTS_FILE.exists():
-        return json.loads(EVENTS_FILE.read_text(encoding="utf-8") or "[]")
+        return json.loads(EVENTS_FILE.read_text(encoding="utf-8-sig") or "[]")
     return []
 
 

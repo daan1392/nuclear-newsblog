@@ -19,7 +19,7 @@ REQUIRED = ("title", "type", "start_date", "end_date", "country", "organizer", "
 def main() -> int:
     countries = {c["code"] for c in yaml.safe_load((ROOT / "_data" / "countries.yml").read_text(encoding="utf-8"))}
     countries |= {"ONLINE", "UNKNOWN"}
-    events = json.loads((ROOT / "_data" / "events.json").read_text(encoding="utf-8") or "[]")
+    events = json.loads((ROOT / "_data" / "events.json").read_text(encoding="utf-8-sig") or "[]")
     errors, seen = [], set()
     for i, e in enumerate(events):
         name = f"#{i} {str(e.get('title', '?'))[:50]}"

@@ -36,7 +36,7 @@ def main() -> int:
     ev = parse(os.environ.get("ISSUE_BODY", ""))
     ev["location"] = ev["city"]
     ev["source"] = "Community submission"
-    events = json.loads(EVENTS_FILE.read_text(encoding="utf-8") or "[]")
+    events = json.loads(EVENTS_FILE.read_text(encoding="utf-8-sig") or "[]")
     if any(e["url"].rstrip("/").lower() == ev["url"].rstrip("/").lower() for e in events):
         print("Already listed.")
         return 0
