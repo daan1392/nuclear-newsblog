@@ -1,0 +1,30 @@
+title: Nuclear Newswire
+description: >-
+  Daily, AI-written briefs on the nuclear sector — reactors, fuel, policy,
+  research and industry. Every article links to its original sources and is
+  reviewed by a human before publication.
+author: Daan
+# For a project site (https://<user>.github.io/<repo>/) set baseurl to "/<repo>".
+# For a user site (repo named <user>.github.io) leave it empty.
+baseurl: ""
+url: ""
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+permalink: /:year/:month/:day/:title/
+show_excerpts: true
+
+minima:
+  skin: auto
+
+header_pages:
+  - about.md
+
+exclude:
+  - scripts/
+  - README.md
+  - requirements.txt
+  - .github/

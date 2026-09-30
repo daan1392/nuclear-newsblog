@@ -1,0 +1,21 @@
+# News feeds the generator reads. Add, remove or disable freely.
+# A feed that fails to load is skipped with a warning; it never breaks the run.
+feeds:
+  - name: World Nuclear News
+    url: https://www.world-nuclear-news.org/rss
+  - name: IAEA News
+    url: https://www.iaea.org/feeds/topnews
+  - name: ANS Nuclear Newswire
+    url: https://www.ans.org/news/feed/
+  - name: US NRC News
+    url: https://www.nrc.gov/public-involve/rss?feed=news
+  - name: NEI Magazine
+    url: https://www.neimagazine.com/rss/
+  - name: SCK CEN
+    url: https://www.sckcen.be/en/rss.xml
+    enabled: false   # enable once you've confirmed the feed URL
+
+# Only items published within this many hours are considered.
+max_age_hours: 48
+# Upper bound on articles per run (keeps PRs reviewable and API cost predictable).
+max_articles: 5
