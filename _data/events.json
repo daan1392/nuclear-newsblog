@@ -1,5 +1,60 @@
 [
  {
+  "title": "Lecture Dr. Carine Michiels | The use of nanoparticles as enhancers for radiotherapy: promises and limits",
+  "type": "lecture",
+  "start_date": "2026-10-06",
+  "end_date": "2026-10-06",
+  "location": "",
+  "organizer": "SCK CEN",
+  "summary": "Lecture by Dr. Carine Michiels on nanoparticles as radiotherapy enhancers, including their promises and limits.",
+  "url": "https://www.sckcen.be/en/events-courses/lecture-RVG-2026-3",
+  "source": "SCK CEN"
+ },
+ {
+  "title": "Basic training in radiation protection",
+  "type": "training",
+  "start_date": "2026-10-12",
+  "end_date": "2026-10-16",
+  "location": "",
+  "organizer": "SCK CEN",
+  "summary": "Five-day basic course in radiation protection.",
+  "url": "https://www.sckcen.be/en/events-courses/basic-training-radiation-protection-361160",
+  "source": "SCK CEN"
+ },
+ {
+  "title": "Lecture Dr. Carine Michiels | Synthetic lethality and senolytic drugs in combination with radiotherapy",
+  "type": "lecture",
+  "start_date": "2026-10-13",
+  "end_date": "2026-10-13",
+  "location": "",
+  "organizer": "SCK CEN",
+  "summary": "Lecture by Dr. Carine Michiels on synthetic lethality and senolytic drugs combined with radiotherapy.",
+  "url": "https://www.sckcen.be/en/events-courses/lecture-RVG-2026-4",
+  "source": "SCK CEN"
+ },
+ {
+  "title": "Online training | Safety Communication and Feedback – Nuclear Safety Culture",
+  "type": "training",
+  "start_date": "2026-10-19",
+  "end_date": "2026-10-19",
+  "location": "Online",
+  "organizer": "SCK CEN",
+  "summary": "Online nuclear safety training on safety communication and feedback as part of nuclear safety culture.",
+  "url": "https://www.sckcen.be/en/framatome_safetycommunication2026",
+  "source": "SCK CEN"
+ },
+ {
+  "title": "Lecture Dr. Carine Michiels | Immunogenic cell death and radiotherapy: how to make them working together",
+  "type": "lecture",
+  "start_date": "2026-10-27",
+  "end_date": "2026-10-27",
+  "location": "",
+  "organizer": "SCK CEN",
+  "summary": "Lecture by Dr. Carine Michiels on combining immunogenic cell death with radiotherapy.",
+  "url": "https://www.sckcen.be/en/events-courses/lecture-RVG-2026-5",
+  "source": "SCK CEN"
+ },
+ {
   "title": "Borssele Nuclear Power Station",
   "type": "technical-visit",
   "start_date": "2026-11-09",
@@ -19,6 +74,39 @@
   "organizer": "Belgian Nuclear Society Young Generation (BNS-YG)",
   "summary": "A nuclear-themed quiz evening organised by the BNS Young Generation for the nuclear community.",
   "url": "https://bnsorg.be/event/nuclear-quiz-2026/",
+  "source": "Belgian Nuclear Society"
+ },
+ {
+  "title": "Stralingsbescherming RPO klasse II & III",
+  "type": "training",
+  "start_date": "2026-11-17",
+  "end_date": "2026-11-20",
+  "location": "",
+  "organizer": "SCK CEN",
+  "summary": "Radiation protection course (in Dutch) for radiation protection officers, class II and III.",
+  "url": "https://www.sckcen.be/en/events-courses/stralingsbescherming-rpo-klasse-ii-iii-351035113512",
+  "source": "SCK CEN"
+ },
+ {
+  "title": "LEANDREA - Technical webinar",
+  "type": "training",
+  "start_date": "2026-11-24",
+  "end_date": "2026-11-24",
+  "location": "Online",
+  "organizer": "SCK CEN",
+  "summary": "Technical webinar on the LEANDREA topic hosted by SCK CEN.",
+  "url": "https://www.sckcen.be/en/events-courses/leandrea-technical-webinar",
+  "source": "SCK CEN"
+ },
+ {
+  "title": "Nuclear Science Contest 2026",
+  "type": "contest",
+  "start_date": "2026-12-03",
+  "end_date": "2026-12-03",
+  "location": "Tabloo",
+  "organizer": "Belgian Nuclear Society",
+  "summary": "Science contest on nuclear topics held at Tabloo.",
+  "url": "https://bnsorg.be/event/nuclear-science-contest-2026/",
   "source": "Belgian Nuclear Society"
  }
 ]
