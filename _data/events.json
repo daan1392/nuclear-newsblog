@@ -1,1 +1,24 @@
-[]
+[
+ {
+  "title": "Borssele Nuclear Power Station",
+  "type": "technical-visit",
+  "start_date": "2026-11-09",
+  "end_date": "2026-11-09",
+  "location": "",
+  "organizer": "Belgian Nuclear Society",
+  "summary": "Belgian Nuclear Society event at the Borssele Nuclear Power Station, apparently a site visit for members; the listing gives no further details.",
+  "url": "https://bnsorg.be/event/borssele-nuclear-power-station/",
+  "source": "Belgian Nuclear Society"
+ },
+ {
+  "title": "BNS-YG Nuclear Quiz 2026",
+  "type": "social",
+  "start_date": "2026-11-12",
+  "end_date": "2026-11-12",
+  "location": "",
+  "organizer": "Belgian Nuclear Society Young Generation (BNS-YG)",
+  "summary": "A nuclear-themed quiz evening organised by the BNS Young Generation for the nuclear community.",
+  "url": "https://bnsorg.be/event/nuclear-quiz-2026/",
+  "source": "Belgian Nuclear Society"
+ }
+]
