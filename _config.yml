@@ -21,6 +21,7 @@ minima:
   skin: auto
 
 header_pages:
+  - events.md
   - about.md
 
 exclude:

@@ -1,0 +1,21 @@
+# Web pages the events generator reads (summer schools, trainings, technical
+# visits, social events). Pages are fetched as text and Claude extracts the
+# upcoming events. A page that fails to load is skipped with a warning.
+sources:
+  - name: Belgian Nuclear Society
+    url: https://bnsorg.be/events/upcoming-events/
+  - name: European Nuclear Society
+    url: https://www.euronuclear.org/events/
+  - name: SCK CEN
+    url: https://www.sckcen.be/en/events-courses
+  - name: ENEN
+    url: https://enen.eu/
+  - name: ENEN Education & Training
+    url: https://enen.eu/index.php/category/education-and-training/
+  - name: IAEA
+    url: https://www.iaea.org/events
+  - name: OECD/NEA
+    url: https://www.oecd-nea.org/jcms/pl_20/events
+  # LinkedIn (BNS Young Generation) cannot be fetched automatically: it needs a
+  # login and scraping is against LinkedIn's terms. Add those events by hand in
+  # _data/events.json, or open a PR / issue with the link.

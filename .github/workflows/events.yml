@@ -1,0 +1,58 @@
+name: Update events
+
+on:
+  schedule:
+    - cron: "43 6 * * 1"   # weekly, Mondays 06:43 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-events
+  cancel-in-progress: false
+
+jobs:
+  events:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Extract events with Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/generate_events.py
+
+      - name: Today's date
+        id: date
+        run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.PR_TOKEN || secrets.GITHUB_TOKEN }}
+          branch: events/${{ steps.date.outputs.today }}
+          commit-message: "Update events ${{ steps.date.outputs.today }}"
+          title: "📅 Events update — ${{ steps.date.outputs.today }}"
+          body: |
+            Automatically extracted upcoming events (summer schools, trainings,
+            technical visits, social events) from the organisers' pages.
+
+            **Review checklist**
+            - [ ] Dates, places and links match the organiser's page
+            - [ ] Event types make sense
+            - [ ] Nothing that isn't really an event
+
+            Edit `_data/events.json` in this PR to fix or remove entries, then merge to publish.
+          labels: events
+          add-paths: |
+            _data/events.json
+          delete-branch: true
