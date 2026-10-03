@@ -98,6 +98,20 @@
   "deadline": ""
  },
  {
+  "title": "Online Training - Transforming Nuclear Safety Culture: From Rules to Real Commitment",
+  "type": "training",
+  "start_date": "2026-10-23",
+  "end_date": "2026-11-11",
+  "country": "ONLINE",
+  "city": "",
+  "location": "",
+  "organizer": "SCK CEN",
+  "summary": "Initial online training course on transforming nuclear safety culture.",
+  "url": "https://www.sckcen.be/en/events-courses/online-training-transforming-nuclear-safety-culture-rules-real-commitment-initial-training-course",
+  "deadline": "",
+  "source": "SCK CEN"
+ },
+ {
   "title": "Lecture Dr. Carine Michiels | Immunogenic cell death and radiotherapy: how to make them working together",
   "type": "lecture",
   "start_date": "2026-10-27",
@@ -138,6 +152,20 @@
   "country": "BE",
   "city": "",
   "deadline": ""
+ },
+ {
+  "title": "Technical Visit - COVRA",
+  "type": "technical-visit",
+  "start_date": "2026-11-13",
+  "end_date": "2026-11-13",
+  "country": "NL",
+  "city": "",
+  "location": "COVRA",
+  "organizer": "Belgian Nuclear Society",
+  "summary": "Technical visit to the COVRA nuclear waste facility.",
+  "url": "https://bnsorg.be/event/covra2026/",
+  "deadline": "",
+  "source": "Belgian Nuclear Society"
  },
  {
   "title": "2026 ANS Winter Conference & Expo",
