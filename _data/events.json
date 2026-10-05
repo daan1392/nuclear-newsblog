@@ -238,6 +238,20 @@
   "deadline": ""
  },
  {
+  "title": "Convention nationale d'automne 2026",
+  "type": "conference",
+  "start_date": "2026-11-30",
+  "end_date": "2026-11-30",
+  "country": "FR",
+  "city": "Paris",
+  "location": "Maison de la Chimie, Rue Saint-Dominique, Paris, France",
+  "organizer": "SFEN",
+  "summary": "Autumn national convention on closing the nuclear fuel cycle.",
+  "url": "https://www.sfen.org/evenement/convention-nationale-dautomne-2026/",
+  "deadline": "",
+  "source": "SFEN"
+ },
+ {
   "title": "Nuclear Science Contest 2026",
   "type": "contest",
   "start_date": "2026-12-03",
