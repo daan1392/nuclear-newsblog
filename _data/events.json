@@ -126,6 +126,20 @@
   "deadline": ""
  },
  {
+  "title": "Rapsodie/Phénix: L'héritage des pionniers",
+  "type": "lecture",
+  "start_date": "2026-11-04",
+  "end_date": "2026-11-04",
+  "country": "FR",
+  "city": "",
+  "location": "",
+  "organizer": "SFEN",
+  "summary": "A webinar on the legacy of Rapsodie and Phénix reactors, pioneering nuclear facilities.",
+  "url": "https://www.sfen.org/evenement/rapsodie-phenix-lheritage-des-pionniers/",
+  "deadline": "",
+  "source": "SFEN"
+ },
+ {
   "title": "Borssele Nuclear Power Station",
   "type": "technical-visit",
   "start_date": "2026-11-09",
