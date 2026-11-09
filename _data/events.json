@@ -154,6 +154,20 @@
   "deadline": ""
  },
  {
+  "title": "Superphénix: les enseignements de l'industrie",
+  "type": "training",
+  "start_date": "2026-11-12",
+  "end_date": "2026-11-12",
+  "country": "FR",
+  "city": "",
+  "location": "",
+  "organizer": "SFEN",
+  "summary": "A webinar discussing lessons from the Superphénix nuclear facility.",
+  "url": "https://www.sfen.org/evenement/superphenix-les-enseignements-de-lindustrie/",
+  "deadline": "",
+  "source": "SFEN"
+ },
+ {
   "title": "Technical Visit - COVRA",
   "type": "technical-visit",
   "start_date": "2026-11-13",
